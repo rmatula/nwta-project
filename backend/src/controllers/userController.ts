@@ -2,7 +2,6 @@ import { Request, Response } from "express";
 import expressAsyncHandler from "express-async-handler";
 import argon2 from "argon2";
 import User from "../models/userModel";
-import Order from "../models/orderModel";
 import { generateToken } from "../utils";
 
 export const signin = expressAsyncHandler(async (req: Request, res: Response) => {
@@ -55,30 +54,6 @@ export const getUser = expressAsyncHandler(async (req, res) => {
   }
 });
 
-export const getProfileInfo = expressAsyncHandler(async (req, res) => {
-  const user = await User.findById(req.params.id);
-  const orders = await Order.find({ user: req.params.id });
-
-  if (!user) {
-    res.status(404).send({ message: "User not Found" });
-    return;
-  }
-
-  if (!orders) {
-    res.status(404).send({ message: "Orders not Found" });
-    return;
-  }
-
-  res.send({
-    user: {
-      _id: user._id,
-      name: user.name,
-      email: user.email,
-      createrdAt: user.createdAt,
-    },
-    orders,
-  });
-});
 
 export const patchProfileInfo = expressAsyncHandler(async (req, res) => {
   const user = await User.findById(req.user._id);

@@ -3,7 +3,9 @@ import express, { Request, Response, NextFunction } from "express";
 import mongoose from "mongoose";
 import morgan from "morgan";
 import cors from "cors";
+import productRouter from "./routers/productRouter";
 import userRouter from "./routers/userRouter";
+
 
 dotenv.config();
 
@@ -26,7 +28,9 @@ app.get("/", (_, res) => {
   res.send("Server is ready");
 });
 
+app.use("/api/products", productRouter);
 app.use("/api/users", userRouter);
+
 
 // An error catcher
 app.use((err: any, _: Request, res: Response, __: NextFunction) => {
