@@ -5,6 +5,7 @@ import { isAdmin, isAuth } from "../utils";
 const userRouter = express.Router();
 
 userRouter.get("/:id", isAuth, isAdmin, userController.getUser);
+userRouter.get("/:id/profile", isAuth, userController.getProfileInfo);
 
 userRouter.post("/signin", userController.signin);
 userRouter.post("/register", userController.register);

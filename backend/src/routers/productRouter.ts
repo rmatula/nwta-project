@@ -7,31 +7,31 @@ import * as productController from "../controllers/productController";
 
 // Multer config
 const storage = multer.diskStorage({
-    destination: (req, _, cb) => {
-        const pathBrand = req.body.brand.toLowerCase().replace(/\s+/g, "-");
-        const pathModel = req.body.name.toLowerCase().replace(/\s+/g, "-");
-        fs.mkdirSync(`./uploads/${pathBrand}/${pathModel}`, { recursive: true });
-        cb(null, `./uploads/${pathBrand}/${pathModel}`);
-    },
-    filename: (_, file, cb) => {
-        cb(null, Date.now() + file.originalname);
-    },
+  destination: (req, _, cb) => {
+    const pathBrand = req.body.brand.toLowerCase().replace(/\s+/g, "-");
+    const pathModel = req.body.name.toLowerCase().replace(/\s+/g, "-");
+    fs.mkdirSync(`./uploads/${pathBrand}/${pathModel}`, { recursive: true });
+    cb(null, `./uploads/${pathBrand}/${pathModel}`);
+  },
+  filename: (_, file, cb) => {
+    cb(null, Date.now() + file.originalname);
+  },
 });
 
 const upload = multer({
-    storage,
-    limits: {
-        fileSize: 1024 * 1024 * 5, // 5MB limit
-    },
-    fileFilter: (_, file, cb) => {
-        // accept a file
-        if (file.mimetype === "image/jpeg" || file.mimetype === "image/jpg" || file.mimetype === "image/png") {
-            cb(null, true);
-        } else {
-            // decline a file
-            cb(null, false);
-        }
-    },
+  storage,
+  limits: {
+    fileSize: 1024 * 1024 * 5, // 5MB limit
+  },
+  fileFilter: (_, file, cb) => {
+    // accept a file
+    if (file.mimetype === "image/jpeg" || file.mimetype === "image/jpg" || file.mimetype === "image/png") {
+      cb(null, true);
+    } else {
+      // decline a file
+      cb(null, false);
+    }
+  },
 });
 
 const productRouter = express.Router();
