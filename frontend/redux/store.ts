@@ -10,7 +10,9 @@ const makeStore = () =>
   createStore(
     rootReducer,
     composeWithDevTools(
-      applyMiddleware(thunk.withExtraArgument({} as ThunkMiddleware<AppState, AppActions>))
+      applyMiddleware(
+        thunk.withExtraArgument({} as ThunkMiddleware<AppState, AppActions>)
+      )
     )
   );
 

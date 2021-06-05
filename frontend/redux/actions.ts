@@ -1,10 +1,12 @@
-import { FavoritesActionTypes } from "./favorites/favoritesTypes";
 import { UserActionTypes } from "./user/userTypes";
-import { NavbarActionTypes } from "./navbar/navbarTypes";
+import { FavoritesActionTypes } from "./favorites/favoritesTypes";
 import { CartActionTypes } from "./cart/cartTypes";
+import { NavbarActionTypes } from "./navbar/navbarTypes";
+import { OrderActionTypes } from "./order/orderTypes";
 
 export type AppActions =
-  | NavbarActionTypes
-  | UserActionTypes
+  | CartActionTypes
   | FavoritesActionTypes
-  | CartActionTypes;
+  | NavbarActionTypes
+  | OrderActionTypes
+  | UserActionTypes;

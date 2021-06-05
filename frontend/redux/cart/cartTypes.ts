@@ -54,7 +54,6 @@ export interface ShippingAddress {
   postalCode: string;
   country: string;
 }
-
 export interface CartState {
   items: CartItem[];
   step: number;

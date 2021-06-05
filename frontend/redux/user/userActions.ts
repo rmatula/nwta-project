@@ -4,10 +4,9 @@ import { localStorageNames } from "../../constants";
 import { AppActions } from "../actions";
 import { AppState } from "../rootReducer";
 import * as userActions from "./userTypes";
+import * as orderActions from "../order/orderTypes";
 
-export const signin = (email: string, password: string) => async (
-  dispatch: Dispatch<AppActions>
-) => {
+export const signin = (email: string, password: string) => async (dispatch: Dispatch<AppActions>) => {
   dispatch({
     type: userActions.USER_SIGNIN_REQUEST,
   });
@@ -18,15 +17,12 @@ export const signin = (email: string, password: string) => async (
   } catch (error) {
     dispatch({
       type: userActions.USER_SIGNIN_FAIL,
-      payload:
-        error.response && error.response.data.message ? error.response.data.message : error.message,
+      payload: error.response && error.response.data.message ? error.response.data.message : error.message,
     });
   }
 };
 
-export const register = (email: string, name: string, password: string) => async (
-  dispatch: Dispatch<AppActions>
-) => {
+export const register = (email: string, name: string, password: string) => async (dispatch: Dispatch<AppActions>) => {
   dispatch({
     type: userActions.USER_REGISTER_REQUEST,
   });
@@ -41,19 +37,14 @@ export const register = (email: string, name: string, password: string) => async
   } catch (error) {
     dispatch({
       type: userActions.USER_REGISTER_FAIL,
-      payload:
-        error.response && error.response.data.message ? error.response.data.message : error.message,
+      payload: error.response && error.response.data.message ? error.response.data.message : error.message,
     });
   }
 };
 
-export const addComment = (
-  body: string,
-  name: string,
-  rating: number,
-  product: string,
-  userId: string
-) => async (dispatch: Dispatch<AppActions>) => {
+export const addComment = (body: string, name: string, rating: number, product: string, userId: string) => async (
+  dispatch: Dispatch<AppActions>
+) => {
   dispatch({
     type: userActions.USER_ADD_COMMENT_REQUEST,
   });
@@ -69,8 +60,7 @@ export const addComment = (
   } catch (error) {
     dispatch({
       type: userActions.USER_REGISTER_FAIL,
-      payload:
-        error.response && error.response.data.message ? error.response.data.message : error.message,
+      payload: error.response && error.response.data.message ? error.response.data.message : error.message,
     });
   }
 };
@@ -97,10 +87,20 @@ export const deleteComment = (commentId: string, productId: string) => async (
   } catch (error) {
     dispatch({
       type: userActions.USER_DELETE_COMMENT_FAIL,
-      payload:
-        error.response && error.response.data.message ? error.response.data.message : error.message,
+      payload: error.response && error.response.data.message ? error.response.data.message : error.message,
     });
   }
+};
+
+export const signOut = () => async (dispatch: Dispatch<AppActions>, getState: () => AppState) => {
+  localStorage.removeItem(localStorageNames.USER_INFO);
+  localStorage.removeItem(localStorageNames.CART_ITEMS);
+  dispatch({
+    type: userActions.USER_SIGNOUT,
+  });
+  dispatch({
+    type: orderActions.ORDER_CLEAN_UP,
+  });
 };
 
 export const cleanUp = () => ({
