@@ -29,7 +29,7 @@ import {
 
 export const Header = () => {
   const { items: cartItems }: CartState = useSelector((state: AppState) => state.cart);
-  const { items: favoritesItems }: CartState = useSelector((state: AppState) => state.favorites);
+  const { items: favoritesItems } = useSelector((state: AppState) => state.favorites);
   const { user }: UserState = useSelector((state: AppState) => state.user);
   const { open }: NavbarState = useSelector((state: AppState) => state.navbar);
   const [searchOpen, setSearchOpen] = useState<boolean>(false);
