@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { TiArrowSortedDown } from "react-icons/Ti";
+import { TiArrowSortedDown } from "react-icons/ti";
 import { StyledDropdown, Ul, Li } from "./styles";
 import Link from "next/link";
 
