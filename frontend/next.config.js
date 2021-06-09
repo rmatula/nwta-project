@@ -2,6 +2,6 @@
 
 module.exports = {
   images: {
-    domains: ["localhost", "https://api.webeternity.codes", "api.webeternity.codes"],
+    domains: ["https://api.webeternity.codes", "api.webeternity.codes"],
   },
 };
